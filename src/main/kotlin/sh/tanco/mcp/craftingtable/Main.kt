@@ -1,4 +1,4 @@
-package com.mcp.craftingtable
+package sh.tanco.mcp.craftingtable
 
 import io.ktor.utils.io.streams.asInput
 import io.modelcontextprotocol.kotlin.sdk.server.Server

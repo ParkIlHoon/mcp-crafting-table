@@ -3,7 +3,7 @@ plugins {
     application
 }
 
-group = "com.mcp"
+group = "sh.tanco.mcp"
 version = "1.0.0"
 
 repositories {
