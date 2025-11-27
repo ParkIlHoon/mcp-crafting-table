@@ -47,7 +47,7 @@ jobs:
           pwd
           ls -la
 
-      - uses: anthropics/claude-code-action@v1.0.20
+      - uses: anthropics/claude-code-action@vbeta
         with:
           anthropic_api_key: ${{ secrets.ANTHROPIC_API_KEY }}
           # github_token: ${{ secrets.GH_PAT }}
