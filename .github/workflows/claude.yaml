@@ -10,6 +10,11 @@ on:
   pull_request_review:
     types: [submitted]
 
+permissions:
+  contents: write
+  pull-requests: write
+  issues: write
+
 jobs:
  claude-response:
     if: |
@@ -23,15 +28,25 @@ jobs:
         uses: actions/checkout@v4
         with:
           fetch-depth: 0
-          
-      # - name: Generate GitHub App token
-      #   id: app-token
-      #   uses: actions/create-github-app-token@v1
-      #   with:
-      #     app-id: ${{ secrets.APP_ID }}
-      #     private-key: ${{ secrets.APP_PRIVATE_KEY }}
+          token: ${{ secrets.GH_PAT }}
 
-      # Use Claude with your custom app's token
+      - name: Configure Git
+        run: |
+          git config --global user.name "Claude-Github Action[bot]"
+          git config --global user.email "Claude-Github-Action[bot]@users.noreply.github.com"
+          
+      - name: Debug - Git status
+        run: |
+          echo "=== Git Status ==="
+          git status
+          echo "=== Git Branches ==="
+          git branch -a
+          echo "=== Git Remote ==="
+          git remote -v
+          echo "=== Current Directory ==="
+          pwd
+          ls -la
+
       - uses: anthropics/claude-code-action@v1
         with:
           anthropic_api_key: ${{ secrets.ANTHROPIC_API_KEY }}
