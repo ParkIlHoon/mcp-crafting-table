@@ -51,4 +51,5 @@ jobs:
         with:
           anthropic_api_key: ${{ secrets.ANTHROPIC_API_KEY }}
           branch_prefix: "claude-"
+          show_full_output: true
           # github_token: ${{ secrets.GH_PAT }}
