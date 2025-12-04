@@ -25,6 +25,17 @@ jobs:
       id-token: write
       actions: read # Required for Claude to read CI results on PRs
     steps:
+      - name: Test API Key
+        run: |
+          if [ -z "${{ secrets.ANTHROPIC_API_KEY }}" ]; then
+            echo "❌ API Key is empty!"
+          else
+            echo "✅ API Key exists (length: ${#ANTHROPIC_API_KEY})"
+            echo "✅ First 7 chars: ${ANTHROPIC_API_KEY:0:7}"
+          fi
+        env:
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+    
       - name: Checkout repository
         uses: actions/checkout@v4
         with:
