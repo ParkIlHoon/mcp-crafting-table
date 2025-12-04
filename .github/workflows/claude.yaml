@@ -30,24 +30,12 @@ jobs:
         with:
           fetch-depth: 0
           token: ${{ secrets.GH_PAT }}
-
-      - name: Configure Git
+     
+      - name: Debug
         run: |
-          git config --global user.name "Claude-Github Action[bot]"
-          git config --global user.email "Claude-Github-Action[bot]@users.noreply.github.com"
-          
-      - name: Debug - Git status
-        run: |
-          echo "=== Git Status ==="
-          git status
-          echo "=== Git Branches ==="
-          git branch -a
-          echo "=== Git Remote ==="
-          git remote -v
-          echo "=== Current Directory ==="
-          pwd
-          ls -la
-
+          echo "API Key exists: ${{ secrets.ANTHROPIC_API_KEY != '' }}"
+          echo "Comment body: ${{ github.event.comment.body }}"
+      
       - uses: anthropics/claude-code-action@v1
         with:
           anthropic_api_key: ${{ secrets.ANTHROPIC_API_KEY }}
